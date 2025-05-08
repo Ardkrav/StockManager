@@ -7,7 +7,7 @@ El grupo esta conformado por dos integrantes:
 - Agustín Collareda.
 - Hugo Frey.
 
-No existe una separación de roles clara ya que al ser un grupo pequeño por lo que se optó que cada miembro del equipo tendran las mismas responsabilidades y actividades.
+No existe una separación de roles clara ya que al ser un grupo pequeño, se optó que cada miembro tendran las mismas responsabilidades y actividades.
 
 ## Herramientas a utilizar
 ### Entorno de desarrollo
@@ -33,7 +33,6 @@ No existe una separación de roles clara ya que al ser un grupo pequeño por lo 
 - Discord
 - WhatsApp
 
----
 ## Documentación
 - Especificacion de requerimientos.
     - Definición de Proyecto.
