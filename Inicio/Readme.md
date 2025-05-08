@@ -1,6 +1,14 @@
 # Definición del proyecto
 El proyecto se da en contexto de la materia Gestión de Calidad con el fin de que los alumnos integrantes del equipo de desarrollo puedan aplicar y entender los conceptos de calidad a la hora de desarrollar un software.
 - - -
+
+## Grupo de desarrollo
+El grupo esta conformado por dos integrantes: 
+- Agustín Collareda.
+- Hugo Frey.
+
+No existe una separación de roles clara ya que al ser un grupo pequeño por lo que se optó que cada miembro del equipo tendran las mismas responsabilidades y actividades.
+
 ## Herramientas a utilizar
 ### Entorno de desarrollo
 
@@ -18,6 +26,7 @@ El proyecto se da en contexto de la materia Gestión de Calidad con el fin de qu
 
 ### Documentación y otras herramientas
 - Documento de google
+- Markdown
 - Figma
 - ChatGPT
 - Trello
@@ -35,11 +44,3 @@ El proyecto se da en contexto de la materia Gestión de Calidad con el fin de qu
 - Planificación Agil.
 - Plan SQA.
 - Manual de usuario. 
-
----
-### Grupo de desarrollo
-El grupo esta conformado por dos integrantes: 
-- Agustín Collareda.
-- Hugo Frey.
-
-No existe una separación de roles clara ya que al ser un grupo pequeño por lo que se optó que cada miembro del equipo tendran las mismas responsabilidades y actividades.
