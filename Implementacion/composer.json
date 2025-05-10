@@ -1,0 +1,11 @@
+{
+    "name": "hugoa/stock-manager",
+    "autoload": {
+        "psr-4": {
+            "Hugoa\\StockManager\\": "src/"
+        }
+    },
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
+}
