@@ -54,7 +54,7 @@ class Mueble {
     public function crearMueble(){
         $query = "INSERT INTO mueble (nombre, peso, ancho, alto, largo) VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->conexion->prepare($query);
-        $stmt->bind_param("sddii", $this->nombre, $this->peso, $this->ancho, $this->alto, $this->largo);
+        $stmt->bind_param("sdddd", $this->nombre, $this->peso, $this->ancho, $this->alto, $this->largo);
         if ($stmt->execute()) {
             return true;
         } else {
