@@ -32,7 +32,7 @@ $muebles = $controladorMueble->listarMuebles();
     </header>
     <section>
         <button onclick="window.location.href='./crearMueble.php'">Agregar</button>
-        <table>
+        <table border="1">
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>

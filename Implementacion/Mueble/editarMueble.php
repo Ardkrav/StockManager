@@ -40,20 +40,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label for="nombre">Nombre:</label>
             <input id="nombre" name="nombre" type="text" value ="<?php echo $mueble["nombre"] ?>">
             <br>
-            <label for="peso">Peso:</label>
+            <label for="peso">Peso (kg):</label>
             <input id="peso" name="peso" type="number" step="0.01" value ="<?php echo $mueble["peso"] ?>">
             <br>
-            <label for="ancho">Ancho:</label>
+            <label for="ancho">Ancho (m):</label>
             <input id="ancho" name="ancho" type="number" step="0.01" value ="<?php echo $mueble["ancho"] ?>">
             <br>
-            <label for="largo">Largo:</label>
+            <label for="largo">Largo (m):</label>
             <input id="largo" name="largo" type="number" step="0.01" value ="<?php echo $mueble["largo"] ?>">
             <br>
-            <label for="alto">Alto:</label>
+            <label for="alto">Alto (m):</label>
             <input id="alto" name="alto" type="number" step="0.01" value ="<?php echo $mueble["alto"] ?>">
-            <br>
-            <label for="volumen">Volumen:</label>
-            <input id="volumen" type="number" step="0.01" readonly value ="<?php echo $mueble["volumen"] ?>">
             <hr>
             <button type="submit">Aceptar</button>
             <button id="cancelar" >Cancelar</button>
