@@ -23,6 +23,7 @@ No existe una separación de roles clara ya que al ser un grupo pequeño, se opt
 - Xampp
 - MariaDB
 - Apache
+- Composer
 
 ### Documentación y otras herramientas
 - Documento de google
@@ -32,6 +33,7 @@ No existe una separación de roles clara ya que al ser un grupo pequeño, se opt
 - Trello
 - Discord
 - WhatsApp
+- Dia
 
 ## Documentación
 - Especificacion de requerimientos.
