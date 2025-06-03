@@ -1,8 +1,11 @@
 <?php
 
-namespace Implementacion\PHP;
+namespace StockManager\PHP;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/bootstrap.php';
+
+use mysqli;
+
 /**
  * Description of BDConexion
  *
@@ -24,8 +27,6 @@ class BDConexion extends mysqli
 
     public function __construct()
     {
-        $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/..");
-        $dotenv->load();
         $this->host = $_ENV['DB_HOST'];
         $this->usuario = $_ENV['DB_USER'];
         $this->contrasenia = $_ENV['DB_PASS'];

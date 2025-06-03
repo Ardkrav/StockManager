@@ -1,6 +1,11 @@
 <?php
 
-require_once __DIR__ . '/../PHP/controladorMueble.php';
+namespace StockManager\Mueble;
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use StockManager\PHP\ControladorMueble;
+
 
 $controladorMueble = new controladorMueble();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -20,11 +25,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Manager</title>
 </head>
+
 <body>
     <header>
         <nav>
@@ -52,9 +59,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input id="alto" name="alto" type="number" step="0.01">
             <hr>
             <button type="submit">Aceptar</button>
-            <button id="cancelar" >Cancelar</button>
+            <button id="cancelar">Cancelar</button>
         </form>
     </section>
     <script src="./js/cancelarFormulario.js"></script>
 </body>
+
 </html>

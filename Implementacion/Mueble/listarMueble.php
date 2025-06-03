@@ -1,7 +1,12 @@
 <?php
-include_once '../PHP/controladorMueble.php';
 
-$controladorMueble = new controladorMueble();
+namespace StockManager\Mueble;
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use StockManager\PHP\ControladorMueble;
+
+$controladorMueble = new ControladorMueble();
 
 if (isset($_GET['eliminar'])) {
     $id_mueble = $_GET['eliminar'];
@@ -16,11 +21,13 @@ $muebles = $controladorMueble->listarMuebles();
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Manager</title>
 </head>
+
 <body>
     <header>
         <nav>
@@ -53,10 +60,8 @@ $muebles = $controladorMueble->listarMuebles();
                     <td><?php echo $mueble['alto']; ?></td>
                     <td><?php echo $mueble['volumen']; ?></td>
                     <td>
-                        <button 
-                            onclick=
-                            "window.location.href='editarMueble.php?id_mueble=<?php echo $mueble['id_mueble']; ?>'"
-                        >
+                        <button
+                            onclick="window.location.href='editarMueble.php?id_mueble=<?php echo $mueble['id_mueble']; ?>'">
                             Editar
                         </button>
                         <button onclick="onConfirm(<?php echo $mueble['id_mueble']; ?>)">Eliminar</button>
@@ -69,7 +74,7 @@ $muebles = $controladorMueble->listarMuebles();
         <script>
             function onConfirm(id_mueble) {
                 if (confirm("¿Está seguro de que desea eliminar este mueble?")) {
-                    
+
                     window.location.href = `listarMueble.php?eliminar=${id_mueble}`
                 } else {
                 }
@@ -77,4 +82,5 @@ $muebles = $controladorMueble->listarMuebles();
         </script>
     </section>
 </body>
+
 </html>
