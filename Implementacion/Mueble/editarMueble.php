@@ -10,7 +10,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $alto = $_POST['alto'];
     $largo = $_POST['largo'];
 
-    $muebleActualizado = $controladorMueble->actualizarMuebleId($_GET['id_mueble'], $nombre, $peso, $ancho, $alto, $largo);
+    $muebleActualizado = $controladorMueble->actualizarMuebleId(
+        $_GET['id_mueble'],
+        $nombre,
+        $peso,
+        $ancho,
+        $alto,
+        $largo
+    );
     if ($muebleActualizado) {
         header('Location: ./listarMueble.php');
         exit();

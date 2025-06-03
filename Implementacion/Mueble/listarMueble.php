@@ -53,7 +53,12 @@ $muebles = $controladorMueble->listarMuebles();
                     <td><?php echo $mueble['alto']; ?></td>
                     <td><?php echo $mueble['volumen']; ?></td>
                     <td>
-                        <button onclick="window.location.href='editarMueble.php?id_mueble=<?php echo $mueble['id_mueble']; ?>'">Editar</button>
+                        <button 
+                            onclick=
+                            "window.location.href='editarMueble.php?id_mueble=<?php echo $mueble['id_mueble']; ?>'"
+                        >
+                            Editar
+                        </button>
                         <button onclick="onConfirm(<?php echo $mueble['id_mueble']; ?>)">Eliminar</button>
                     </td>
 

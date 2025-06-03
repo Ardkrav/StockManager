@@ -1,14 +1,16 @@
 <?php
 
+namespace Implementacion\PHP;
+
 require_once __DIR__ . '/BDConexion.php';
 require_once __DIR__ . '/models/mueble.php';
 
-class controladorMueble
+class ControladorMueble
 {
     private $conexion;
     private $mueble;
 
-    function __construct()
+    public function __construct()
     {
         $this->conexion = BDConexion::getInstancia();
         $this->mueble = new Mueble($this->conexion);

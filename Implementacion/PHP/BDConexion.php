@@ -1,5 +1,7 @@
 <?php
 
+namespace Implementacion\PHP;
+
 require_once __DIR__ . '/../vendor/autoload.php';
 /**
  * Description of BDConexion
@@ -14,10 +16,13 @@ require_once __DIR__ . '/../vendor/autoload.php';
  */
 class BDConexion extends mysqli
 {
-    private $host, $usuario, $contrasenia, $schema;
+    private $host;
+    private $usuario;
+    private $contrasenia;
+    private $schema;
     public static $instancia;
 
-    function __construct()
+    public function __construct()
     {
         $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/..");
         $dotenv->load();

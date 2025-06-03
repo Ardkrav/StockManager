@@ -1,12 +1,26 @@
 <?php
 
+namespace Implementacion\PHP\models;
+
 class Mueble
 {
-    private $nombre, $peso, $ancho, $alto, $largo, $volumen;
+    private $nombre;
+    private $peso;
+    private $ancho;
+    private $alto;
+    private $largo;
+    private $volumen;
     private $conexion;
 
-    function __construct($conexion, $nombre = null, $peso = null, $ancho = null, $alto = null, $largo = null, $volumen = null)
-    {
+    public function __construct(
+        $conexion,
+        $nombre = null,
+        $peso = null,
+        $ancho = null,
+        $alto = null,
+        $largo = null,
+        $volumen = null
+    ) {
         $this->conexion = $conexion;
         $this->nombre = $nombre;
         $this->peso = $peso;
