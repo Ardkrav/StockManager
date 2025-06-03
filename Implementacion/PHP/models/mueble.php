@@ -1,9 +1,12 @@
-<?php 
-class Mueble {
+<?php
+
+class Mueble
+{
     private $nombre, $peso, $ancho, $alto, $largo, $volumen;
     private $conexion;
 
-    function __construct($conexion, $nombre = null, $peso = null, $ancho = null, $alto = null, $largo = null, $volumen = null) {
+    function __construct($conexion, $nombre = null, $peso = null, $ancho = null, $alto = null, $largo = null, $volumen = null)
+    {
         $this->conexion = $conexion;
         $this->nombre = $nombre;
         $this->peso = $peso;
@@ -13,45 +16,58 @@ class Mueble {
         $this->volumen = $volumen;
     }
 
-    public function getNombre() {
+    public function getNombre()
+    {
         return $this->nombre;
     }
-    public function getPeso() {
+    public function getPeso()
+    {
         return $this->peso;
     }
-    public function getAncho() {
+    public function getAncho()
+    {
         return $this->ancho;
     }
-    public function getLargo() {
+    public function getLargo()
+    {
         return $this->largo;
     }
-    public function getAlto() {
+    public function getAlto()
+    {
         return $this->alto;
     }
-    public function getVolumen() {
+    public function getVolumen()
+    {
         return $this->volumen;
     }
 
-    public function setNombre($nombre) {
+    public function setNombre($nombre)
+    {
         $this->nombre = $nombre;
     }
-    public function setPeso($peso) {
+    public function setPeso($peso)
+    {
         $this->peso = $peso;
     }
-    public function setAncho($ancho) {
+    public function setAncho($ancho)
+    {
         $this->ancho = $ancho;
     }
-    public function setLargo($largo) {
+    public function setLargo($largo)
+    {
         $this->largo = $largo;
     }
-    public function setAlto($alto) {
+    public function setAlto($alto)
+    {
         $this->alto = $alto;
     }
-    public function setVolumen() {
+    public function setVolumen()
+    {
         $this->volumen = $this->alto * $this->ancho * $this->largo;
     }
 
-    public function crearMueble(){
+    public function crearMueble()
+    {
         $query = "INSERT INTO mueble (nombre, peso, ancho, alto, largo) VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->conexion->prepare($query);
         $stmt->bind_param("sdddd", $this->nombre, $this->peso, $this->ancho, $this->alto, $this->largo);
@@ -62,7 +78,8 @@ class Mueble {
         }
     }
 
-    public function listarMuebles(){
+    public function listarMuebles()
+    {
         $muebles = $this->conexion->query("SELECT * FROM mueble");
         $resultado = [];
         while ($fila = $muebles->fetch_assoc()) {
@@ -72,7 +89,8 @@ class Mueble {
         return $resultado;
     }
 
-    public function obtenerMuebleId($id_mueble){
+    public function obtenerMuebleId($id_mueble)
+    {
         $query = "SELECT * FROM mueble WHERE id_mueble = ?";
         $stmt = $this->conexion->prepare($query);
         $stmt->bind_param("i", $id_mueble);
@@ -81,7 +99,8 @@ class Mueble {
         return $resultado;
     }
 
-    public function eliminarMuebleId($id_mueble){
+    public function eliminarMuebleId($id_mueble)
+    {
         $query = "DELETE FROM mueble WHERE id_mueble = ?";
         $stmt = $this->conexion->prepare($query);
         $stmt->bind_param("i", $id_mueble);
@@ -93,7 +112,8 @@ class Mueble {
         }
     }
 
-    public function actualizarMuebleId($id_mueble){
+    public function actualizarMuebleId($id_mueble)
+    {
         $query = "UPDATE mueble SET nombre = ?, peso = ?, ancho = ?, alto = ?, largo = ? WHERE id_mueble = ?";
         $stmt = $this->conexion->prepare($query);
         $stmt->bind_param("sddddi", $this->nombre, $this->peso, $this->ancho, $this->alto, $this->largo, $id_mueble);
@@ -104,5 +124,4 @@ class Mueble {
             return false;
         }
     }
-
 }

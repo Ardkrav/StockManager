@@ -1,4 +1,4 @@
-<?php 
+<?php
 include_once '../PHP/controladorMueble.php';
 
 $controladorMueble = new controladorMueble();
@@ -6,7 +6,7 @@ $controladorMueble = new controladorMueble();
 if (isset($_GET['eliminar'])) {
     $id_mueble = $_GET['eliminar'];
     $controladorMueble->eliminarMuebleId($id_mueble);
-    header("Location: listarMueble.php"); 
+    header("Location: listarMueble.php");
     exit();
 }
 
@@ -43,7 +43,7 @@ $muebles = $controladorMueble->listarMuebles();
                 <th>Volumen (m3)</th>
                 <th>Acci&oacute;n</th>
             </tr>
-            <?php foreach ($muebles as $mueble): ?>
+            <?php foreach ($muebles as $mueble) : ?>
                 <tr>
                     <td><?php echo $mueble['id_mueble']; ?></td>
                     <td><?php echo $mueble['nombre']; ?></td>

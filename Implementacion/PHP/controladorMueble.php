@@ -1,17 +1,21 @@
 <?php
+
 require_once __DIR__ . '/BDConexion.php';
 require_once __DIR__ . '/models/mueble.php';
 
-class controladorMueble {
+class controladorMueble
+{
     private $conexion;
     private $mueble;
-    
-    function __construct() {
+
+    function __construct()
+    {
         $this->conexion = BDConexion::getInstancia();
         $this->mueble = new Mueble($this->conexion);
     }
-    
-    public function crearMueble($nombre, $peso, $ancho, $alto, $largo) {
+
+    public function crearMueble($nombre, $peso, $ancho, $alto, $largo)
+    {
         $this->mueble->setNombre($nombre);
         $this->mueble->setPeso($peso);
         $this->mueble->setAncho($ancho);
@@ -22,12 +26,14 @@ class controladorMueble {
         return $resultado;
     }
 
-    public function listarMuebles(){
+    public function listarMuebles()
+    {
         $resultado = $this->mueble->listarMuebles();
         return $resultado;
     }
 
-    public function obtenerMuebleId($id_mueble){
+    public function obtenerMuebleId($id_mueble)
+    {
         $resultado = $this->mueble->obtenerMuebleId($id_mueble);
         $this->mueble->setNombre($resultado["nombre"]);
         $this->mueble->setPeso($resultado["peso"]);
@@ -39,7 +45,8 @@ class controladorMueble {
         return $resultado;
     }
 
-    public function actualizarMuebleId($id_mueble, $nombre, $peso, $ancho, $alto, $largo) {
+    public function actualizarMuebleId($id_mueble, $nombre, $peso, $ancho, $alto, $largo)
+    {
         $this->mueble->setNombre($nombre);
         $this->mueble->setPeso($peso);
         $this->mueble->setAncho($ancho);
@@ -50,9 +57,9 @@ class controladorMueble {
         return $resultado;
     }
 
-    public function eliminarMuebleId($id_mueble) {
+    public function eliminarMuebleId($id_mueble)
+    {
         $resultado = $this->mueble->eliminarMuebleId($id_mueble);
         return $resultado;
     }
-
 }

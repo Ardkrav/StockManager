@@ -1,4 +1,5 @@
 <?php
+
 require_once __DIR__ . '/../PHP/controladorMueble.php';
 
 $controladorMueble = new controladorMueble();
