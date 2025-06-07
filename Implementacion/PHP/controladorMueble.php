@@ -2,8 +2,6 @@
 
 namespace StockManager\PHP;
 
-require_once __DIR__ . '/../vendor/autoload.php';
-
 use StockManager\PHP\Model\Mueble;
 use StockManager\PHP\BDConexion;
 

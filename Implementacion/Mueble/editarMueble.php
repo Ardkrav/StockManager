@@ -2,7 +2,7 @@
 
 namespace StockManager\Mueble;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../PHP/bootstrap.php';
 
 use StockManager\PHP\ControladorMueble;
 

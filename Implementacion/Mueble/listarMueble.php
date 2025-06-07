@@ -2,7 +2,7 @@
 
 namespace StockManager\Mueble;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../PHP/bootstrap.php';
 
 use StockManager\PHP\ControladorMueble;
 
@@ -61,7 +61,8 @@ $muebles = $controladorMueble->listarMuebles();
                     <td><?php echo $mueble['volumen']; ?></td>
                     <td>
                         <button
-                            onclick="window.location.href='editarMueble.php?id_mueble=<?php echo $mueble['id_mueble']; ?>'">
+                            onclick=
+                            "window.location.href='editarMueble.php?id_mueble=<?php echo $mueble['id_mueble']; ?>'">
                             Editar
                         </button>
                         <button onclick="onConfirm(<?php echo $mueble['id_mueble']; ?>)">Eliminar</button>
