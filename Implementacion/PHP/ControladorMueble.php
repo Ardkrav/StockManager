@@ -3,17 +3,17 @@
 namespace StockManager\PHP;
 
 use StockManager\PHP\Model\Mueble;
-use StockManager\PHP\BDConexion;
+use StockManager\PHP\MuebleMapper;
 
 class ControladorMueble
 {
-    private $conexion;
     private $mueble;
+    private $mapper;
 
     public function __construct()
     {
-        $this->conexion = BDConexion::getInstancia();
-        $this->mueble = new Mueble($this->conexion);
+        $this->mapper = new MuebleMapper();
+        $this->mueble = new Mueble();
     }
 
     public function crearMueble($nombre, $peso, $ancho, $alto, $largo)
@@ -24,19 +24,28 @@ class ControladorMueble
         $this->mueble->setAlto($alto);
         $this->mueble->setLargo($largo);
         $this->mueble->setVolumen();
-        $resultado = $this->mueble->crearMueble();
+
+        $datos = [
+            'nombre' => $this->mueble->getNombre(),
+            'peso' => $this->mueble->getPeso(),
+            'ancho' => $this->mueble->getAncho(),
+            'alto' => $this->mueble->getAlto(),
+            'largo' => $this->mueble->getLargo()
+        ];
+
+        $resultado = $this->mapper->crearMueble($datos);
         return $resultado;
     }
 
     public function listarMuebles()
     {
-        $resultado = $this->mueble->listarMuebles();
+        $resultado = $this->mapper->listarMuebles();
         return $resultado;
     }
 
     public function obtenerMuebleId($id_mueble)
     {
-        $resultado = $this->mueble->obtenerMuebleId($id_mueble);
+        $resultado = $this->mapper->obtenerMuebleId($id_mueble);
         $this->mueble->setNombre($resultado["nombre"]);
         $this->mueble->setPeso($resultado["peso"]);
         $this->mueble->setAncho($resultado["ancho"]);
@@ -55,13 +64,22 @@ class ControladorMueble
         $this->mueble->setAlto($alto);
         $this->mueble->setLargo($largo);
         $this->mueble->setVolumen();
-        $resultado = $this->mueble->actualizarMuebleId($id_mueble);
+
+        $datos = [
+            'nombre' => $this->mueble->getNombre(),
+            'peso' => $this->mueble->getPeso(),
+            'ancho' => $this->mueble->getAncho(),
+            'alto' => $this->mueble->getAlto(),
+            'largo' => $this->mueble->getLargo()
+        ];
+
+        $resultado = $this->mapper->actualizarMuebleId($id_mueble, $datos);
         return $resultado;
     }
 
     public function eliminarMuebleId($id_mueble)
     {
-        $resultado = $this->mueble->eliminarMuebleId($id_mueble);
+        $resultado = $this->mapper->eliminarMuebleId($id_mueble);
         return $resultado;
     }
 }
