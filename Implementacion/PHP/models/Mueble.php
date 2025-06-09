@@ -19,7 +19,6 @@ class Mueble
         $largo = null,
         $volumen = null
     ) {
-        $this->conexion = $conexion;
         $this->nombre = $nombre;
         $this->peso = $peso;
         $this->ancho = $ancho;

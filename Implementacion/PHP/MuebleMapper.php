@@ -19,11 +19,11 @@ class MuebleMapper
         $stmt = $this->conexion->prepare($query);
         $stmt->bind_param(
             "sdddd",
-            $datos['nombre'],
-            $datos['peso'],
-            $datos['ancho'],
-            $datos['alto'],
-            $datos['largo']
+            $datos->getNombre(),
+            $datos->getPeso(),
+            $datos->getAncho(),
+            $datos->getAlto(),
+            $datos->getLargo()
         );
         if ($stmt->execute()) {
             return true;
@@ -72,11 +72,11 @@ class MuebleMapper
         $stmt = $this->conexion->prepare($query);
         $stmt->bind_param(
             "sddddi",
-            $datos['nombre'],
-            $datos['peso'],
-            $datos['ancho'],
-            $datos['alto'],
-            $datos['largo'],
+            $datos->getNombre(),
+            $datos->getPeso(),
+            $datos->getAncho(),
+            $datos->getAlto(),
+            $datos->getLargo(),
             $id_mueble
         );
         $stmt->execute();

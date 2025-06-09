@@ -10,20 +10,9 @@ use StockManager\PHP\ControladorMueble;
 $controladorMueble = new controladorMueble();
 $mueble = $controladorMueble->obtenerMuebleId($_GET['id_mueble']);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nombre = $_POST['nombre'];
-    $peso = $_POST['peso'];
-    $ancho = $_POST['ancho'];
-    $alto = $_POST['alto'];
-    $largo = $_POST['largo'];
+    $arrayAsociativo = ["id_mueble" => $_GET['id_mueble'], "nombre" => $_POST['nombre'], "peso" => $_POST['peso'], "ancho" => $_POST['ancho'], "alto" => $_POST['alto'], "largo" => $_POST['largo']];
 
-    $muebleActualizado = $controladorMueble->actualizarMuebleId(
-        $_GET['id_mueble'],
-        $nombre,
-        $peso,
-        $ancho,
-        $alto,
-        $largo
-    );
+    $muebleActualizado = $controladorMueble->actualizarMuebleId($arrayAsociativo);
     if ($muebleActualizado) {
         header('Location: ./listarMueble.php');
         exit();
@@ -53,19 +42,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <section>
         <form method="POST">
             <label for="nombre">Nombre:</label>
-            <input id="nombre" name="nombre" type="text" value="<?php echo $mueble["nombre"] ?>">
+            <input id="nombre" name="nombre" type="text" value="<?php echo $mueble->getNombre() ?>">
             <br>
             <label for="peso">Peso (kg):</label>
-            <input id="peso" name="peso" type="number" step="0.01" value="<?php echo $mueble["peso"] ?>">
+            <input id="peso" name="peso" type="number" step="0.01" value="<?php echo $mueble->getPeso() ?>">
             <br>
             <label for="ancho">Ancho (m):</label>
-            <input id="ancho" name="ancho" type="number" step="0.01" value="<?php echo $mueble["ancho"] ?>">
+            <input id="ancho" name="ancho" type="number" step="0.01" value="<?php echo $mueble->getAncho() ?>">
             <br>
             <label for="largo">Largo (m):</label>
-            <input id="largo" name="largo" type="number" step="0.01" value="<?php echo $mueble["largo"] ?>">
+            <input id="largo" name="largo" type="number" step="0.01" value="<?php echo $mueble->getLargo() ?>">
             <br>
             <label for="alto">Alto (m):</label>
-            <input id="alto" name="alto" type="number" step="0.01" value="<?php echo $mueble["alto"] ?>">
+            <input id="alto" name="alto" type="number" step="0.01" value="<?php echo $mueble->getAlto() ?>">
             <hr>
             <button type="submit">Aceptar</button>
             <button id="cancelar">Cancelar</button>

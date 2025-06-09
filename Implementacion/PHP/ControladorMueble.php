@@ -16,24 +16,20 @@ class ControladorMueble
         $this->mueble = new Mueble();
     }
 
-    public function crearMueble($nombre, $peso, $ancho, $alto, $largo)
+    public function crearMueble($arrayAsociativo)
     {
-        $this->mueble->setNombre($nombre);
-        $this->mueble->setPeso($peso);
-        $this->mueble->setAncho($ancho);
-        $this->mueble->setAlto($alto);
-        $this->mueble->setLargo($largo);
-        $this->mueble->setVolumen();
+        if (!isset($arrayAsociativo['nombre']) || !isset($arrayAsociativo['peso']) ||
+            !isset($arrayAsociativo['ancho']) || !isset($arrayAsociativo['alto']) ||
+            !isset($arrayAsociativo['largo'])) {
+            throw new \InvalidArgumentException("Faltan datos para crear el mueble.");
+        }
+        $this->mueble->setNombre($arrayAsociativo['nombre']);
+        $this->mueble->setPeso($arrayAsociativo['peso']);
+        $this->mueble->setAncho($arrayAsociativo['ancho']);
+        $this->mueble->setAlto($arrayAsociativo['alto']);
+        $this->mueble->setLargo($arrayAsociativo['largo']);
 
-        $datos = [
-            'nombre' => $this->mueble->getNombre(),
-            'peso' => $this->mueble->getPeso(),
-            'ancho' => $this->mueble->getAncho(),
-            'alto' => $this->mueble->getAlto(),
-            'largo' => $this->mueble->getLargo()
-        ];
-
-        $resultado = $this->mapper->crearMueble($datos);
+        $resultado = $this->mapper->crearMueble($this->mueble);
         return $resultado;
     }
 
@@ -51,29 +47,24 @@ class ControladorMueble
         $this->mueble->setAncho($resultado["ancho"]);
         $this->mueble->setAlto($resultado["alto"]);
         $this->mueble->setLargo($resultado["largo"]);
-        $this->mueble->setVolumen();
-        $resultado["volumen"] = $this->mueble->getVolumen();
-        return $resultado;
+        return $this->mueble;
     }
 
-    public function actualizarMuebleId($id_mueble, $nombre, $peso, $ancho, $alto, $largo)
+    public function actualizarMuebleId($arrayAsociativo)
     {
-        $this->mueble->setNombre($nombre);
-        $this->mueble->setPeso($peso);
-        $this->mueble->setAncho($ancho);
-        $this->mueble->setAlto($alto);
-        $this->mueble->setLargo($largo);
-        $this->mueble->setVolumen();
+        if (!isset($arrayAsociativo['nombre']) || !isset($arrayAsociativo['peso']) ||
+            !isset($arrayAsociativo['ancho']) || !isset($arrayAsociativo['alto']) ||
+            !isset($arrayAsociativo['largo']) || !isset($arrayAsociativo['id_mueble'])) {
+            throw new \InvalidArgumentException("Faltan datos para actualizar el mueble.");
+        }
+        $this->mueble->setNombre($arrayAsociativo['nombre']);
+        $this->mueble->setPeso($arrayAsociativo['peso']);
+        $this->mueble->setAncho($arrayAsociativo['ancho']);
+        $this->mueble->setAlto($arrayAsociativo['alto']);
+        $this->mueble->setLargo($arrayAsociativo['largo']);
 
-        $datos = [
-            'nombre' => $this->mueble->getNombre(),
-            'peso' => $this->mueble->getPeso(),
-            'ancho' => $this->mueble->getAncho(),
-            'alto' => $this->mueble->getAlto(),
-            'largo' => $this->mueble->getLargo()
-        ];
 
-        $resultado = $this->mapper->actualizarMuebleId($id_mueble, $datos);
+        $resultado = $this->mapper->actualizarMuebleId($arrayAsociativo["id_mueble"], $this->mueble);
         return $resultado;
     }
 

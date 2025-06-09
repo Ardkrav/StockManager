@@ -9,13 +9,9 @@ use StockManager\PHP\ControladorMueble;
 
 $controladorMueble = new controladorMueble();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nombre = $_POST['nombre'];
-    $peso = $_POST['peso'];
-    $ancho = $_POST['ancho'];
-    $alto = $_POST['alto'];
-    $largo = $_POST['largo'];
+    $arrayAsociativo = ["nombre" => $_POST['nombre'], "peso" => $_POST['peso'], "ancho" => $_POST['ancho'], "alto" => $_POST['alto'], "largo" => $_POST['largo']];
 
-    $muebleCreado = $controladorMueble->crearMueble($nombre, $peso, $ancho, $alto, $largo);
+    $muebleCreado = $controladorMueble->crearMueble($arrayAsociativo);
     if ($muebleCreado) {
         header('Location: ./listarMueble.php');
         exit();
