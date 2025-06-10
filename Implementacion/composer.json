@@ -2,7 +2,6 @@
     "name": "hugoa/stock-manager",
     "autoload": {
         "psr-4": {
-            "StockManager\\Mueble\\": "Mueble/",
             "StockManager\\PHP\\Model\\": "PHP/models/",
             "StockManager\\PHP\\": "PHP/"
         }

@@ -37,7 +37,6 @@ class MuebleMapper
         $muebles = $this->conexion->query("SELECT * FROM mueble");
         $resultado = [];
         while ($fila = $muebles->fetch_assoc()) {
-            $fila['volumen'] = $fila['alto'] * $fila['ancho'] * $fila['largo'];
             $resultado[] = $fila;
         }
         return $resultado;
@@ -66,7 +65,7 @@ class MuebleMapper
         }
     }
 
-    public function actualizarMuebleId($id_mueble, $datos)
+    public function actualizarMuebleId($datos)
     {
         $query = "UPDATE mueble SET nombre = ?, peso = ?, ancho = ?, alto = ?, largo = ? WHERE id_mueble = ?";
         $stmt = $this->conexion->prepare($query);
@@ -77,7 +76,7 @@ class MuebleMapper
             $datos->getAncho(),
             $datos->getAlto(),
             $datos->getLargo(),
-            $id_mueble
+            $datos->getId()
         );
         $stmt->execute();
         if ($stmt->affected_rows > 0) {

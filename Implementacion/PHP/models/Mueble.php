@@ -4,6 +4,7 @@ namespace StockManager\PHP\Model;
 
 class Mueble
 {
+    private $id;
     private $nombre;
     private $peso;
     private $ancho;
@@ -12,21 +13,25 @@ class Mueble
     private $volumen;
 
     public function __construct(
+        $id = null,
         $nombre = null,
         $peso = null,
         $ancho = null,
         $alto = null,
-        $largo = null,
-        $volumen = null
+        $largo = null
     ) {
+        $this->id = $id;
         $this->nombre = $nombre;
         $this->peso = $peso;
         $this->ancho = $ancho;
         $this->alto = $alto;
         $this->largo = $largo;
-        $this->volumen = $volumen;
     }
 
+    public function getId()
+    {
+        return $this->id;
+    }
     public function getNombre()
     {
         return $this->nombre;
@@ -52,6 +57,10 @@ class Mueble
         return $this->volumen;
     }
 
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
     public function setNombre($nombre)
     {
         $this->nombre = $nombre;
