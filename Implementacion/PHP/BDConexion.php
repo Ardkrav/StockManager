@@ -2,8 +2,6 @@
 
 namespace StockManager\PHP;
 
-require_once __DIR__ . '/bootstrap.php';
-
 use mysqli;
 
 /**

@@ -1,14 +1,13 @@
 <?php
 
-namespace StockManager\Mueble;
-
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../PHP/bootstrap.php';
 
 use StockManager\PHP\ControladorMueble;
 
 $controladorMueble = new ControladorMueble();
 
-if (isset($_GET['eliminar'])) {
+if (isset($_GET['eliminar'])) 
+{
     $id_mueble = $_GET['eliminar'];
     $controladorMueble->eliminarMuebleId($id_mueble);
     header("Location: listarMueble.php");
@@ -52,19 +51,20 @@ $muebles = $controladorMueble->listarMuebles();
             </tr>
             <?php foreach ($muebles as $mueble) : ?>
                 <tr>
-                    <td><?php echo $mueble['id_mueble']; ?></td>
-                    <td><?php echo $mueble['nombre']; ?></td>
-                    <td><?php echo $mueble['peso']; ?></td>
-                    <td><?php echo $mueble['ancho']; ?></td>
-                    <td><?php echo $mueble['largo']; ?></td>
-                    <td><?php echo $mueble['alto']; ?></td>
-                    <td><?php echo $mueble['volumen']; ?></td>
+                    <td><?php echo $mueble->getId(); ?></td>
+                    <td><?php echo $mueble->getNombre(); ?></td>
+                    <td><?php echo $mueble->getPeso(); ?></td>
+                    <td><?php echo $mueble->getAncho(); ?></td>
+                    <td><?php echo $mueble->getLargo(); ?></td>
+                    <td><?php echo $mueble->getAlto(); ?></td>
+                    <td><?php echo $mueble->getVolumen(); ?></td>
                     <td>
                         <button
-                            onclick="window.location.href='editarMueble.php?id_mueble=<?php echo $mueble['id_mueble']; ?>'">
+                            onclick=
+                            "window.location.href='editarMueble.php?id_mueble=<?php echo $mueble->getId(); ?>'">
                             Editar
                         </button>
-                        <button onclick="onConfirm(<?php echo $mueble['id_mueble']; ?>)">Eliminar</button>
+                        <button onclick="onConfirm(<?php echo $mueble->getId(); ?>)">Eliminar</button>
                     </td>
 
                 </tr>
@@ -74,9 +74,9 @@ $muebles = $controladorMueble->listarMuebles();
         <script>
             function onConfirm(id_mueble) {
                 if (confirm("¿Está seguro de que desea eliminar este mueble?")) {
-
                     window.location.href = `listarMueble.php?eliminar=${id_mueble}`
                 } else {
+                    return;
                 }
             }
         </script>
