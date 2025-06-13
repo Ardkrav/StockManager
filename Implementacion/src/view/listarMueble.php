@@ -1,13 +1,12 @@
 <?php
 
-require_once __DIR__ . '/../PHP/bootstrap.php';
+require_once __DIR__ . '/../bootstrap.php';
 
-use StockManager\PHP\ControladorMueble;
+use StockManager\controller\ControladorMueble;
 
 $controladorMueble = new ControladorMueble();
 
-if (isset($_GET['eliminar'])) 
-{
+if (isset($_GET['eliminar'])) {
     $id_mueble = $_GET['eliminar'];
     $controladorMueble->eliminarMuebleId($id_mueble);
     header("Location: listarMueble.php");

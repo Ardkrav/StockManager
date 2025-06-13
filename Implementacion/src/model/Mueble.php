@@ -1,6 +1,6 @@
 <?php
 
-namespace StockManager\PHP\Model;
+namespace StockManager\model;
 
 class Mueble
 {

@@ -18,9 +18,7 @@ class ComposerStaticInit64346b8609cb28735828a5e4ee192da1
             'Symfony\\Polyfill\\Php80\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
-            'StockManager\\PHP\\Model\\' => 23,
-            'StockManager\\PHP\\' => 17,
-            'StockManager\\Mueble\\' => 20,
+            'StockManager\\' => 13,
         ),
         'P' => 
         array (
@@ -49,17 +47,9 @@ class ComposerStaticInit64346b8609cb28735828a5e4ee192da1
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
-        'StockManager\\PHP\\Model\\' => 
+        'StockManager\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/PHP/models',
-        ),
-        'StockManager\\PHP\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/PHP',
-        ),
-        'StockManager\\Mueble\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/Mueble',
+            0 => __DIR__ . '/../..' . '/src',
         ),
         'PhpOption\\' => 
         array (

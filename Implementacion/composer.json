@@ -2,8 +2,7 @@
     "name": "hugoa/stock-manager",
     "autoload": {
         "psr-4": {
-            "StockManager\\PHP\\Model\\": "PHP/models/",
-            "StockManager\\PHP\\": "PHP/"
+            "StockManager\\": "src"
         }
     },
     "require": {

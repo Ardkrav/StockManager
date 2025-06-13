@@ -1,8 +1,9 @@
 <?php
 
-namespace StockManager\PHP;
+namespace StockManager\controller;
 
-use StockManager\PHP\Model\Mueble;
+use StockManager\model\Mueble;
+use StockManager\connection\MuebleMapper;
 
 class ControladorMueble
 {
@@ -17,9 +18,11 @@ class ControladorMueble
 
     public function crearMueble($arrayAsociativo)
     {
-        if (empty($arrayAsociativo['nombre']) || empty($arrayAsociativo['peso']) ||
+        if (
+            empty($arrayAsociativo['nombre']) || empty($arrayAsociativo['peso']) ||
             empty($arrayAsociativo['ancho']) || empty($arrayAsociativo['alto']) ||
-            empty($arrayAsociativo['largo'])) {
+            empty($arrayAsociativo['largo'])
+        ) {
             throw new \InvalidArgumentException("Faltan datos para crear el mueble.");
         }
         $this->mueble->setNombre($arrayAsociativo['nombre']);
@@ -38,13 +41,12 @@ class ControladorMueble
         $muebles = [];
         foreach ($resultado as $value) {
             $muebleCargar = new Mueble(
-                $value["id_mueble"], 
-                $value["nombre"], 
-                $value["peso"], 
-                $value["ancho"], 
+                $value["id_mueble"],
+                $value["nombre"],
+                $value["peso"],
+                $value["ancho"],
                 $value["alto"],
                 $value["largo"]
-
             );
             $muebleCargar->setVolumen();
             $muebles[] = $muebleCargar;
@@ -65,9 +67,11 @@ class ControladorMueble
 
     public function actualizarMuebleId($arrayAsociativo)
     {
-        if (empty($arrayAsociativo['nombre']) || empty($arrayAsociativo['peso']) ||
+        if (
+            empty($arrayAsociativo['nombre']) || empty($arrayAsociativo['peso']) ||
             empty($arrayAsociativo['ancho']) || empty($arrayAsociativo['alto']) ||
-            empty($arrayAsociativo['largo']) || empty($arrayAsociativo['id_mueble'])) {
+            empty($arrayAsociativo['largo']) || empty($arrayAsociativo['id_mueble'])
+        ) {
             throw new \InvalidArgumentException("Faltan datos para actualizar el mueble.");
         }
         $this->mueble->setId($arrayAsociativo["id_mueble"]);

@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'hugoa/stock-manager',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-develop',
+        'version' => 'dev-develop',
+        'reference' => '6121a3d4f8506a09a39b327e655d4ab35966ca32',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -20,9 +20,9 @@
             'dev_requirement' => false,
         ),
         'hugoa/stock-manager' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-develop',
+            'version' => 'dev-develop',
+            'reference' => '6121a3d4f8506a09a39b327e655d4ab35966ca32',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
