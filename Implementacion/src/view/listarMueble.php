@@ -6,16 +6,8 @@ use StockManager\controller\ControladorMueble;
 
 $controladorMueble = new ControladorMueble();
 
-if (isset($_GET['eliminar'])) {
-    $id_mueble = $_GET['eliminar'];
-    $controladorMueble->eliminarMuebleId($id_mueble);
-    header("Location: listarMueble.php");
-    exit();
-}
-
 $muebles = $controladorMueble->listarMuebles();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="es">
@@ -73,7 +65,7 @@ $muebles = $controladorMueble->listarMuebles();
         <script>
             function onConfirm(id_mueble) {
                 if (confirm("¿Está seguro de que desea eliminar este mueble?")) {
-                    window.location.href = `listarMueble.php?eliminar=${id_mueble}`
+                    window.location.href = `getListarMueble.php?eliminar=${id_mueble}`
                 } else {
                     return;
                 }

@@ -1,35 +1,3 @@
-<?php
-
-require_once __DIR__ . '/../bootstrap.php';
-
-use StockManager\controller\ControladorMueble;
-
-
-$controladorMueble = new controladorMueble();
-$mueble = $controladorMueble->obtenerMuebleId($_GET['id_mueble']);
-$error = null;
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $arrayAsociativo = [
-        "id_mueble" => $_GET['id_mueble'],
-        "nombre" => $_POST['nombre'],
-        "peso" => $_POST['peso'],
-        "ancho" => $_POST['ancho'],
-        "alto" => $_POST['alto'],
-        "largo" => $_POST['largo']
-    ];
-
-    try {
-        $controladorMueble->actualizarMuebleId($arrayAsociativo);
-        header('Location: ./listarMueble.php');
-        exit();
-    } catch (\InvalidArgumentException $e) {
-        $error = $e->getMessage();
-    }
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -49,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </h1>
     </header>
     <section>
-        <form method="POST">
+        <form method="POST" action="postEditarMueble.php">
             <label for="nombre">Nombre:</label>
             <input id="nombre" name="nombre" type="text" value="<?php echo $mueble->getNombre() ?>" required>
             <br>

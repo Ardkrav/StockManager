@@ -1,31 +1,3 @@
-<?php
-
-require_once __DIR__ . '/../bootstrap.php';
-
-use StockManager\controller\ControladorMueble;
-
-$controladorMueble = new controladorMueble();
-$error = null;
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $arrayAsociativo = [
-        "nombre" => $_POST['nombre'],
-        "peso" => $_POST['peso'],
-        "ancho" => $_POST['ancho'],
-        "alto" => $_POST['alto'],
-        "largo" => $_POST['largo']
-    ];
-
-    try {
-        $controladorMueble->crearMueble($arrayAsociativo);
-        header('Location: ./listarMueble.php');
-        exit();
-    } catch (\InvalidArgumentException $e) {
-        $error = $e->getMessage();
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -45,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </h1>
     </header>
     <section>
-        <form method="POST">
+        <form method="POST" action="postCrearMueble.php">
             <label for="nombre">Nombre:</label>
             <input id="nombre" name="nombre" type="text" required>
             <br>
