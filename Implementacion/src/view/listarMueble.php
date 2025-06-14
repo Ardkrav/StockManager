@@ -2,12 +2,12 @@
 
 require_once __DIR__ . '/../bootstrap.php';
 
-use StockManager\controller\ControladorMueble;
+use StockManager\Controller\ControladorMueble;
 
 $controladorMueble = new ControladorMueble();
 
 $muebles = $controladorMueble->listarMuebles();
-
+$exito = null;
 if (isset($_GET['exito'])) {
     switch ($_GET['exito']) {
         case 'creado':
@@ -20,10 +20,6 @@ if (isset($_GET['exito'])) {
             $exito = "Mueble eliminado correctamente.";
             break;
     }
-}
-
-if (isset($_GET['error'])) {
-    $exito = $_GET['error'];
 }
 ?>
 
@@ -48,11 +44,7 @@ if (isset($_GET['error'])) {
     <section>
 
         <?php if ($exito) : ?>
-            <p style="color: green; font-weight: bold;"><?php echo htmlspecialchars($exito); ?></p>
-        <?php endif; ?>
-
-        <?php if ($error) : ?>
-            <p style="color: red; font-weight: bold;"><?php echo htmlspecialchars($error); ?></p>
+            <p style="color: green; font-weight: bold;" id="mensajeExito"><?php echo htmlspecialchars($exito); ?></p>
         <?php endif; ?>
 
         <button onclick="window.location.href='./crearMueble.php'">Agregar</button>
@@ -98,6 +90,14 @@ if (isset($_GET['error'])) {
                 }
             }
         </script>
+        <?php if ($exito) : ?>
+            <script>
+                setTimeout(() => {
+                    document.getElementById("mensajeExito").style.display = "none";
+                }, 3000);
+            </script>
+        <?php endif; ?>
+
     </section>
 </body>
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace StockManager\src;
+namespace StockManager;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 

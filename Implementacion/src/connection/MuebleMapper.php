@@ -1,8 +1,8 @@
 <?php
 
-namespace StockManager\connection;
+namespace StockManager\Connection;
 
-use StockManager\connection\BDConexion;
+use StockManager\Connection\BDConexion;
 
 class MuebleMapper
 {

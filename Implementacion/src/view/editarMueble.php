@@ -1,9 +1,12 @@
 <?php
 require_once __DIR__ . '/../bootstrap.php';
 
-use StockManager\controller\ControladorMueble;
-    $controladorMueble = new controladorMueble();
-    $mueble = $controladorMueble->obtenerMuebleId($_GET['id_mueble']);
+use StockManager\Controller\ControladorMueble;
+
+$controladorMueble = new ControladorMueble();
+$mueble = $controladorMueble->obtenerMuebleId($_GET['id_mueble']);
+$error = null
+
 ?>
 
 <!DOCTYPE html>
@@ -45,9 +48,8 @@ use StockManager\controller\ControladorMueble;
             <button id="cancelar">Cancelar</button>
         </form>
         <?php if ($error) : ?>
-        <p><?php echo $error ?></p>
+        <p style="color: red; font-weight: bold;"><?php echo $error ?></p>
         <?php endif; ?>
-
     </section>
     <script src="./js/cancelarFormulario.js"></script>
 

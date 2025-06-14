@@ -1,3 +1,7 @@
+<?php 
+
+$error = null;
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -37,7 +41,7 @@
             <button id="cancelar">Cancelar</button>
         </form>
         <?php if ($error) : ?>
-        <p><?php echo $error ?></p>
+        <p style="color: red; font-weight: bold;"> <?php echo $error ?></p>
         <?php endif; ?>
     </section>
     <script src="./js/cancelarFormulario.js"></script>

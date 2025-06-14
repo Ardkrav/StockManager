@@ -2,7 +2,10 @@
     "name": "hugoa/stock-manager",
     "autoload": {
         "psr-4": {
-            "StockManager\\": "src"
+            "StockManager\\": "src",
+            "StockManager\\Connection\\": "src/connection",
+            "StockManager\\Controller\\": "src/controller",
+            "StockManager\\Model\\": "src/model"
         }
     },
     "require": {

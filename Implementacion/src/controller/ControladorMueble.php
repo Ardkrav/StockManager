@@ -1,9 +1,9 @@
 <?php
 
-namespace StockManager\controller;
+namespace StockManager\Controller;
 
-use StockManager\model\Mueble;
-use StockManager\connection\MuebleMapper;
+use StockManager\Model\Mueble;
+use StockManager\Connection\MuebleMapper;
 
 class ControladorMueble
 {

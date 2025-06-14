@@ -1,6 +1,6 @@
 <?php
 
-namespace StockManager\connection;
+namespace StockManager\Connection;
 
 use mysqli;
 

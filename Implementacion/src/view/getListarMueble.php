@@ -2,7 +2,7 @@
 
     require_once __DIR__ . '/../bootstrap.php';
 
-    use StockManager\controller\ControladorMueble;
+    use StockManager\Controller\ControladorMueble;
 
 if (isset($_GET['eliminar'])) {
     $controladorMueble = new ControladorMueble();

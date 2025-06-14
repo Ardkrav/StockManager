@@ -2,9 +2,9 @@
 
 require_once __DIR__ . '/../bootstrap.php';
 
-use StockManager\controller\ControladorMueble;
+use StockManager\Controller\ControladorMueble;
 
-$controladorMueble = new controladorMueble();
+$controladorMueble = new ControladorMueble();
 $error = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -22,7 +22,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     } catch (\InvalidArgumentException $e) {
         $error = $e->getMessage();
-        header('Location: ./listarMueble.php?exito=error');
-        exit();
     }
 }
