@@ -1,3 +1,11 @@
+<?php
+require_once __DIR__ . '/../bootstrap.php';
+
+use StockManager\controller\ControladorMueble;
+    $controladorMueble = new controladorMueble();
+    $mueble = $controladorMueble->obtenerMuebleId($_GET['id_mueble']);
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -17,7 +25,7 @@
         </h1>
     </header>
     <section>
-        <form method="POST" action="postEditarMueble.php">
+        <form method="POST" action="postEditarMueble.php?id_mueble=<?= $_GET['id_mueble'] ?>">
             <label for="nombre">Nombre:</label>
             <input id="nombre" name="nombre" type="text" value="<?php echo $mueble->getNombre() ?>" required>
             <br>

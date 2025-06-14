@@ -18,9 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         $controladorMueble->crearMueble($arrayAsociativo);
-        header('Location: ./listarMueble.php');
+        header('Location: ./listarMueble.php?exito=creado');
         exit();
     } catch (\InvalidArgumentException $e) {
         $error = $e->getMessage();
+        header('Location: ./listarMueble.php?exito=error');
+        exit();
     }
 }

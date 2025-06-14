@@ -7,6 +7,24 @@ use StockManager\controller\ControladorMueble;
 $controladorMueble = new ControladorMueble();
 
 $muebles = $controladorMueble->listarMuebles();
+
+if (isset($_GET['exito'])) {
+    switch ($_GET['exito']) {
+        case 'creado':
+            $exito = "Mueble agregado correctamente.";
+            break;
+        case 'editado':
+            $exito = "Mueble editado correctamente.";
+            break;
+        case 'eliminado':
+            $exito = "Mueble eliminado correctamente.";
+            break;
+    }
+}
+
+if (isset($_GET['error'])) {
+    $exito = $_GET['error'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -28,6 +46,15 @@ $muebles = $controladorMueble->listarMuebles();
         </h1>
     </header>
     <section>
+
+        <?php if ($exito) : ?>
+            <p style="color: green; font-weight: bold;"><?php echo htmlspecialchars($exito); ?></p>
+        <?php endif; ?>
+
+        <?php if ($error) : ?>
+            <p style="color: red; font-weight: bold;"><?php echo htmlspecialchars($error); ?></p>
+        <?php endif; ?>
+
         <button onclick="window.location.href='./crearMueble.php'">Agregar</button>
         <table border="1">
             <tr>

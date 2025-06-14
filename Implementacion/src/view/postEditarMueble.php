@@ -4,9 +4,7 @@ require_once __DIR__ . '/../bootstrap.php';
 
 use StockManager\controller\ControladorMueble;
 
-
-$controladorMueble = new controladorMueble();
-$mueble = $controladorMueble->obtenerMuebleId($_GET['id_mueble']);
+$controladorMueble = new ControladorMueble();
 $error = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -21,9 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         $controladorMueble->actualizarMuebleId($arrayAsociativo);
-        header('Location: ./listarMueble.php');
+        header('Location: ./listarMueble.php?exito=editado');
         exit();
     } catch (\InvalidArgumentException $e) {
         $error = $e->getMessage();
+        header('Location: ./listarMueble.php?exito=error');
+        exit();
     }
 }
