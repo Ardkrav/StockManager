@@ -1,0 +1,41 @@
+name: PHPUnit
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Traer carpeta tests/ desde rama testing
+        run: |
+          git fetch origin testing
+          git checkout origin/testing -- tests
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+
+      - name: Instalar dependencias
+        run: composer install
+
+      - name: Corregir permisos de phpunit
+        run: chmod +x vendor/bin/phpunit
+
+
+      - name: Ejecutar pruebas y generar reporte
+        run: |
+          mkdir -p test_results
+          composer test -- --testdox-html test_results/phpunit-report.html
+
+      - name: Cargar artefacto de reporte de pruebas
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phpunit-report
+          path: test_results/phpunit-report.html

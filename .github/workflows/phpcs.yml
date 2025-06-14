@@ -1,0 +1,26 @@
+name: PHPCS
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+
+      - name: Instalar dependencias
+        run: composer install
+
+      - name: Corregir permisos de phpcs
+        run: chmod +x vendor/bin/phpcs
+
+      - name: Ejecutar PHPCS
+        run: composer lint
