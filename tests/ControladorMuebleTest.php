@@ -6,17 +6,22 @@ use PHPUnit\Framework\TestCase;
 use StockManager\Controller\ControladorMueble;
 use StockManager\Model\Mueble;
 use StockManager\Connection\MuebleMapper;
+use ReflectionClass;
+use InvalidArgumentException;
+use RunTimeException;
 
 class ControladorMuebleTest extends TestCase
 {
     private $mapperMock;
     private $controlador;
 
-    public function setUp()
+    public function setUp():void
     {
-        $this->mapperMock = $this->createMock(MuebleMapper::class);
+        $this->mapperMock = $this->getMockBuilder(MuebleMapper::class)
+                             ->disableOriginalConstructor()
+                             ->getMock();
 
-        $this->controlador = new ControladorMueble();
+        $this->controlador = new ControladorMueble($this->mapperMock);
         $ref = new ReflectionClass($this->controlador);
         $prop = $ref->getProperty('mapper');
         $prop->setAccessible(true);
@@ -134,8 +139,16 @@ class ControladorMuebleTest extends TestCase
 
         $this->mapperMock->expects($this->once())
             ->method('actualizarMuebleId')
-            ->with($data)
+            ->with($this->callback(function ($mueble) use ($data) {
+                return $mueble->getId() === $data['id_mueble']
+                    && $mueble->getNombre() === $data['nombre']
+                    && $mueble->getPeso() === $data['peso']
+                    && $mueble->getAncho() === $data['ancho']
+                    && $mueble->getAlto() === $data['alto']
+                    && $mueble->getLargo() === $data['largo'];
+            }))
             ->willReturn(true);
+
 
         $resultado = $this->controlador->actualizarMuebleId($data);
 
@@ -150,11 +163,6 @@ class ControladorMuebleTest extends TestCase
             'nombre' => 'Silla',
             'peso' => 10
         ];
-
-        $this->mapperMock->expects($this->once())
-            ->method('actualizarMuebleId')
-            ->with($data)
-            ->willReturn(true);
 
         $resultado = $this->controlador->actualizarMuebleId($data);
     }
