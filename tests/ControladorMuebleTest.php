@@ -29,7 +29,7 @@ class ControladorMuebleTest extends TestCase
     }
 
     // Crear mueble
-    public function testCrearMuebleValido()
+    public function testCP02_1_CrearMuebleValido()
     {
         $data = [
             'nombre' => 'Silla',
@@ -48,7 +48,7 @@ class ControladorMuebleTest extends TestCase
         $this->assertTrue($resultado);
     }
 
-    public function testCrearMuebleInvalido1()
+    public function testCP02_2_CrearMuebleFaltanCampos()
     {
         $this->expectException(InvalidArgumentException::class);
 
@@ -61,7 +61,7 @@ class ControladorMuebleTest extends TestCase
         $this->controlador->crearMueble($data);
     }
 
-    public function testCrearMuebleInvalido2()
+    public function testCP02_3_CrearMuebleConString()
     {
         $this->expectException(InvalidArgumentException::class);
 
@@ -77,7 +77,7 @@ class ControladorMuebleTest extends TestCase
     }
 
     // Obtener muble por id
-    public function testObtenerMueblePorIdValido()
+    public function testCP00_1_ObtenerMuebleValido()
     {
         $muebleData = [
             'nombre' => 'Mesa',
@@ -101,7 +101,7 @@ class ControladorMuebleTest extends TestCase
         $this->assertEquals(120, $mueble->getLargo());
     }
 
-    public function testObtenerMueblePorIdInvalido1()
+    public function testCP00_2_ObtenerMuebleNoEncontrado()
     {
         $this->expectException(RunTimeException::class);
 
@@ -113,7 +113,7 @@ class ControladorMuebleTest extends TestCase
         $mueble = $this->controlador->obtenerMuebleId(5);
     }
 
-    public function testObtenerMueblePorIdInvalido2()
+    public function testCP00_3_ObtenerMuebleIdInvalido()
     {
         $this->expectException(RunTimeException::class);
 
@@ -126,7 +126,7 @@ class ControladorMuebleTest extends TestCase
     }
 
     // Actualizar mueble
-    public function testActualizarMuebleIdValido()
+    public function testCP03_1_ActualizarMuebleValido()
     {
         $data = [
             'id_mueble' => 1,
@@ -155,7 +155,7 @@ class ControladorMuebleTest extends TestCase
         $this->assertTrue($resultado);
     }
 
-    public function testActualizarMuebleIdInvalido()
+    public function testCP03_2_ActualizarMuebleInvalido()
     {
         $this->expectException(InvalidArgumentException::class);
         $data = [
@@ -168,7 +168,7 @@ class ControladorMuebleTest extends TestCase
     }
 
     // Eliminar mueble
-    public function testEliminarMuebleValido()
+    public function testCP04_1_EliminarMuebleValido()
     {
         $this->mapperMock->expects($this->once())
             ->method('eliminarMuebleId')
@@ -179,7 +179,7 @@ class ControladorMuebleTest extends TestCase
         $this->assertEquals(true, $resultado);
     }
 
-    public function testEliminarMuebleInvalido()
+    public function testCP04_2_EliminarMuebleInvalido()
     {
         $this->mapperMock->expects($this->once())
             ->method('eliminarMuebleId')
