@@ -10,20 +10,22 @@ class ControladorMueble
     private $mueble;
     private $mapper;
 
-    public function __construct()
+    public function __construct(?MuebleMapper $mapper = null)
     {
-        $this->mapper = new MuebleMapper();
+        $this->mapper = $mapper ?? new MuebleMapper();
         $this->mueble = new Mueble();
     }
 
     public function crearMueble($arrayAsociativo)
     {
         if (
-            empty($arrayAsociativo['nombre']) || empty($arrayAsociativo['peso']) ||
-            empty($arrayAsociativo['ancho']) || empty($arrayAsociativo['alto']) ||
-            empty($arrayAsociativo['largo'])
+            empty($arrayAsociativo['nombre']) || is_double($arrayAsociativo['peso']) ||
+            is_double($arrayAsociativo['ancho']) || is_double($arrayAsociativo['alto']) ||
+            is_double($arrayAsociativo['largo'])
         ) {
-            throw new \InvalidArgumentException("Faltan datos para crear el mueble.");
+            throw new \InvalidArgumentException(
+                "Datos invalidos. No pueden haber campos vacios. Peso, ancho, alto y largo deben ser double."
+            );
         }
         $this->mueble->setNombre($arrayAsociativo['nombre']);
         $this->mueble->setPeso($arrayAsociativo['peso']);
@@ -57,6 +59,10 @@ class ControladorMueble
     public function obtenerMuebleId($id_mueble)
     {
         $resultado = $this->mapper->obtenerMuebleId($id_mueble);
+        if($resultado === false)
+        {
+            throw new \RunTimeException("No se encontro un mueble con la ID especificada.");
+        }
         $this->mueble->setNombre($resultado["nombre"]);
         $this->mueble->setPeso($resultado["peso"]);
         $this->mueble->setAncho($resultado["ancho"]);
@@ -68,11 +74,13 @@ class ControladorMueble
     public function actualizarMuebleId($arrayAsociativo)
     {
         if (
-            empty($arrayAsociativo['nombre']) || empty($arrayAsociativo['peso']) ||
-            empty($arrayAsociativo['ancho']) || empty($arrayAsociativo['alto']) ||
-            empty($arrayAsociativo['largo']) || empty($arrayAsociativo['id_mueble'])
+            empty($arrayAsociativo['nombre']) || is_double($arrayAsociativo['peso']) ||
+            is_double($arrayAsociativo['ancho']) || is_double($arrayAsociativo['alto']) ||
+            is_double($arrayAsociativo['largo']) || is_integer($arrayAsociativo['id_mueble'])
         ) {
-            throw new \InvalidArgumentException("Faltan datos para actualizar el mueble.");
+            throw new \InvalidArgumentException(
+                "Datos invalidos. No pueden haber campos vacios. Peso, ancho, alto y largo deben ser double. ID debe ser int."
+            );
         }
         $this->mueble->setId($arrayAsociativo["id_mueble"]);
         $this->mueble->setNombre($arrayAsociativo['nombre']);
