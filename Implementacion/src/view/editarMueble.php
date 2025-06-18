@@ -1,26 +1,11 @@
 <?php
+require_once __DIR__ . '/../bootstrap.php';
 
-require_once __DIR__ . '/../PHP/bootstrap.php';
+use StockManager\Controller\ControladorMueble;
 
-use StockManager\PHP\ControladorMueble;
-
-
-$controladorMueble = new controladorMueble();
+$controladorMueble = new ControladorMueble();
 $mueble = $controladorMueble->obtenerMuebleId($_GET['id_mueble']);
-$error = null;
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') 
-{
-    $arrayAsociativo = ["id_mueble" => $_GET['id_mueble'], "nombre" => $_POST['nombre'], "peso" => $_POST['peso'], "ancho" => $_POST['ancho'], "alto" => $_POST['alto'], "largo" => $_POST['largo']];
-
-    try {
-        $controladorMueble->actualizarMuebleId($arrayAsociativo);
-        header('Location: ./listarMueble.php');
-        exit();
-    } catch (\InvalidArgumentException $e) {
-        $error = $e->getMessage();
-    }
-}
+$error = null
 
 ?>
 
@@ -43,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         </h1>
     </header>
     <section>
-        <form method="POST">
+        <form method="POST" action="postEditarMueble.php?id_mueble=<?= $_GET['id_mueble'] ?>">
             <label for="nombre">Nombre:</label>
             <input id="nombre" name="nombre" type="text" value="<?php echo $mueble->getNombre() ?>" required>
             <br>
@@ -62,10 +47,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
             <button type="submit">Aceptar</button>
             <button id="cancelar">Cancelar</button>
         </form>
-        <?php if($error): ?>
-        <p><?php echo $error ?></p>
+        <?php if ($error) : ?>
+        <p style="color: red; font-weight: bold;"><?php echo $error ?></p>
         <?php endif; ?>
-
     </section>
     <script src="./js/cancelarFormulario.js"></script>
 

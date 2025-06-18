@@ -1,8 +1,8 @@
 <?php
 
-namespace StockManager\PHP;
+namespace StockManager\Connection;
 
-use StockManager\PHP\BDConexion;
+use StockManager\Connection\BDConexion;
 
 class MuebleMapper
 {
@@ -58,11 +58,10 @@ class MuebleMapper
         $stmt = $this->conexion->prepare($query);
         $stmt->bind_param("i", $id_mueble);
         $stmt->execute();
-        if ($stmt->affected_rows > 0) {
-            return true;
-        } else {
-            return false;
+        if ($stmt->affected_rows === 0) {
+            throw new RunTimeException("No se encontro el mueble a eliminar");
         }
+        return true;
     }
 
     public function actualizarMuebleId($datos)

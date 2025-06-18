@@ -1,26 +1,38 @@
 <?php
 
-namespace StockManager\PHP;
+namespace StockManager\Controller;
 
-use StockManager\PHP\Model\Mueble;
+use StockManager\Model\Mueble;
+use StockManager\Connection\MuebleMapper;
 
 class ControladorMueble
 {
     private $mueble;
     private $mapper;
 
-    public function __construct()
+    public function __construct(?MuebleMapper $mapper = null)
     {
-        $this->mapper = new MuebleMapper();
+        $this->mapper = $mapper ?? new MuebleMapper();
         $this->mueble = new Mueble();
     }
 
     public function crearMueble($arrayAsociativo)
     {
-        if (empty($arrayAsociativo['nombre']) || empty($arrayAsociativo['peso']) ||
-            empty($arrayAsociativo['ancho']) || empty($arrayAsociativo['alto']) ||
-            empty($arrayAsociativo['largo'])) {
-            throw new \InvalidArgumentException("Faltan datos para crear el mueble.");
+        if (
+            !isset(
+                $arrayAsociativo['nombre'],
+                $arrayAsociativo['peso'],
+                $arrayAsociativo['ancho'],
+                $arrayAsociativo['alto'],
+                $arrayAsociativo['largo']
+            ) ||
+            empty($arrayAsociativo['nombre']) || !is_numeric($arrayAsociativo['peso']) ||
+            !is_numeric($arrayAsociativo['ancho']) || !is_numeric($arrayAsociativo['alto']) ||
+            !is_numeric($arrayAsociativo['largo'])
+        ) {
+            throw new \InvalidArgumentException(
+                "Datos invalidos. No pueden haber campos vacios. Peso, ancho, alto y largo deben ser double."
+            );
         }
         $this->mueble->setNombre($arrayAsociativo['nombre']);
         $this->mueble->setPeso($arrayAsociativo['peso']);
@@ -38,13 +50,12 @@ class ControladorMueble
         $muebles = [];
         foreach ($resultado as $value) {
             $muebleCargar = new Mueble(
-                $value["id_mueble"], 
-                $value["nombre"], 
-                $value["peso"], 
-                $value["ancho"], 
+                $value["id_mueble"],
+                $value["nombre"],
+                $value["peso"],
+                $value["ancho"],
                 $value["alto"],
                 $value["largo"]
-
             );
             $muebleCargar->setVolumen();
             $muebles[] = $muebleCargar;
@@ -55,6 +66,9 @@ class ControladorMueble
     public function obtenerMuebleId($id_mueble)
     {
         $resultado = $this->mapper->obtenerMuebleId($id_mueble);
+        if ($resultado === null) {
+            throw new \RunTimeException("No se encontro un mueble con la ID especificada.");
+        }
         $this->mueble->setNombre($resultado["nombre"]);
         $this->mueble->setPeso($resultado["peso"]);
         $this->mueble->setAncho($resultado["ancho"]);
@@ -65,10 +79,27 @@ class ControladorMueble
 
     public function actualizarMuebleId($arrayAsociativo)
     {
-        if (empty($arrayAsociativo['nombre']) || empty($arrayAsociativo['peso']) ||
-            empty($arrayAsociativo['ancho']) || empty($arrayAsociativo['alto']) ||
-            empty($arrayAsociativo['largo']) || empty($arrayAsociativo['id_mueble'])) {
-            throw new \InvalidArgumentException("Faltan datos para actualizar el mueble.");
+        if (
+            !isset(
+                $arrayAsociativo['nombre'],
+                $arrayAsociativo['peso'],
+                $arrayAsociativo['ancho'],
+                $arrayAsociativo['alto'],
+                $arrayAsociativo['largo'],
+                $arrayAsociativo['id_mueble']
+            ) ||
+            empty($arrayAsociativo['nombre']) ||
+            !is_numeric($arrayAsociativo['peso']) ||
+            !is_numeric($arrayAsociativo['ancho']) ||
+            !is_numeric($arrayAsociativo['alto']) ||
+            !is_numeric($arrayAsociativo['largo']) ||
+            (!is_numeric($arrayAsociativo['id_mueble']) || (float) $arrayAsociativo['id_mueble'] % 1 != 0 )
+        ) {
+            throw new \InvalidArgumentException(
+                "Datos invalidos. No pueden haber campos vacios. 
+                Peso, ancho, alto y largo deben ser double. 
+                ID debe ser int."
+            );
         }
         $this->mueble->setId($arrayAsociativo["id_mueble"]);
         $this->mueble->setNombre($arrayAsociativo['nombre']);

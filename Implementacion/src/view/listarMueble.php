@@ -1,22 +1,27 @@
 <?php
 
-require_once __DIR__ . '/../PHP/bootstrap.php';
+require_once __DIR__ . '/../bootstrap.php';
 
-use StockManager\PHP\ControladorMueble;
+use StockManager\Controller\ControladorMueble;
 
 $controladorMueble = new ControladorMueble();
 
-if (isset($_GET['eliminar'])) 
-{
-    $id_mueble = $_GET['eliminar'];
-    $controladorMueble->eliminarMuebleId($id_mueble);
-    header("Location: listarMueble.php");
-    exit();
-}
-
 $muebles = $controladorMueble->listarMuebles();
+$exito = null;
+if (isset($_GET['exito'])) {
+    switch ($_GET['exito']) {
+        case 'creado':
+            $exito = "Mueble agregado correctamente.";
+            break;
+        case 'editado':
+            $exito = "Mueble editado correctamente.";
+            break;
+        case 'eliminado':
+            $exito = "Mueble eliminado correctamente.";
+            break;
+    }
+}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="es">
@@ -37,6 +42,11 @@ $muebles = $controladorMueble->listarMuebles();
         </h1>
     </header>
     <section>
+
+        <?php if ($exito) : ?>
+            <p style="color: green; font-weight: bold;" id="mensajeExito"><?php echo htmlspecialchars($exito); ?></p>
+        <?php endif; ?>
+
         <button onclick="window.location.href='./crearMueble.php'">Agregar</button>
         <table border="1">
             <tr>
@@ -74,12 +84,20 @@ $muebles = $controladorMueble->listarMuebles();
         <script>
             function onConfirm(id_mueble) {
                 if (confirm("¿Está seguro de que desea eliminar este mueble?")) {
-                    window.location.href = `listarMueble.php?eliminar=${id_mueble}`
+                    window.location.href = `getListarMueble.php?eliminar=${id_mueble}`
                 } else {
                     return;
                 }
             }
         </script>
+        <?php if ($exito) : ?>
+            <script>
+                setTimeout(() => {
+                    document.getElementById("mensajeExito").style.display = "none";
+                }, 3000);
+            </script>
+        <?php endif; ?>
+
     </section>
 </body>
 
