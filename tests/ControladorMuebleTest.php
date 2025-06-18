@@ -15,7 +15,7 @@ class ControladorMuebleTest extends TestCase
     private $mapperMock;
     private $controlador;
 
-    public function setUp():void
+    public function setUp(): void
     {
         $this->mapperMock = $this->getMockBuilder(MuebleMapper::class)
                              ->disableOriginalConstructor()
@@ -108,7 +108,7 @@ class ControladorMuebleTest extends TestCase
         $this->mapperMock->expects($this->once())
             ->method('obtenerMuebleId')
             ->with(5)
-            ->willReturn([]);
+            ->willReturn(null);
 
         $mueble = $this->controlador->obtenerMuebleId(5);
     }
@@ -120,7 +120,7 @@ class ControladorMuebleTest extends TestCase
         $this->mapperMock->expects($this->once())
             ->method('obtenerMuebleId')
             ->with('cinco')
-            ->willReturn([]);
+            ->willReturn(null);
 
         $mueble = $this->controlador->obtenerMuebleId('cinco');
     }
@@ -181,10 +181,12 @@ class ControladorMuebleTest extends TestCase
 
     public function testCP04_2_EliminarMuebleInvalido()
     {
+        $this->expectException(RunTimeException::class);
+
         $this->mapperMock->expects($this->once())
             ->method('eliminarMuebleId')
             ->with(5)
-            ->willReturn(false);
+            ->willThrowException(new RuntimeException("No se encontro el mueble a eliminar"));
 
         $resultado = $this->controlador->eliminarMuebleId(5);
         $this->assertEquals(false, $resultado);
