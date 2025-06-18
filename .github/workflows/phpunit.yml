@@ -8,6 +8,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: Implementacion
+
     steps:
       - uses: actions/checkout@v4
 
@@ -22,16 +26,13 @@ jobs:
           php-version: '8.2'
 
       - name: Instalar dependencias
-        working-directory: Implementacion
         run: composer install
 
       - name: Corregir permisos de phpunit
-        working-directory: Implementacion
         run: chmod +x vendor/bin/phpunit
 
 
       - name: Ejecutar pruebas y generar reporte
-        working-directory: Implementacion
         run: |
           mkdir -p test_results
           composer test -- --testdox-html test_results/phpunit-report.html
