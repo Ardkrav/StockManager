@@ -19,6 +19,8 @@ class ControladorMueble
     public function crearMueble($arrayAsociativo)
     {
         if (
+            !isset($arrayAsociativo['nombre'], $arrayAsociativo['peso'], $arrayAsociativo['ancho'],
+            $arrayAsociativo['alto'], $arrayAsociativo['largo']) ||
             empty($arrayAsociativo['nombre']) || !is_numeric($arrayAsociativo['peso']) ||
             !is_numeric($arrayAsociativo['ancho']) || !is_numeric($arrayAsociativo['alto']) ||
             !is_numeric($arrayAsociativo['largo'])
@@ -59,7 +61,7 @@ class ControladorMueble
     public function obtenerMuebleId($id_mueble)
     {
         $resultado = $this->mapper->obtenerMuebleId($id_mueble);
-        if($resultado === false)
+        if($resultado === null)
         {
             throw new \RunTimeException("No se encontro un mueble con la ID especificada.");
         }
@@ -74,9 +76,14 @@ class ControladorMueble
     public function actualizarMuebleId($arrayAsociativo)
     {
         if (
-            empty($arrayAsociativo['nombre']) || !is_numeric($arrayAsociativo['peso']) ||
-            !is_numeric($arrayAsociativo['ancho']) || !is_numeric($arrayAsociativo['alto']) ||
-            !is_numeric($arrayAsociativo['largo']) || (!is_numeric($arrayAsociativo['id_mueble']) || is_float((Float) $arrayAsociativo['id_mueble']) )
+            !isset($arrayAsociativo['nombre'], $arrayAsociativo['peso'], $arrayAsociativo['ancho'],
+            $arrayAsociativo['alto'], $arrayAsociativo['largo'], $arrayAsociativo['id_mueble']) ||
+            empty($arrayAsociativo['nombre']) || 
+            !is_numeric($arrayAsociativo['peso']) ||
+            !is_numeric($arrayAsociativo['ancho']) || 
+            !is_numeric($arrayAsociativo['alto']) ||
+            !is_numeric($arrayAsociativo['largo']) || 
+            (!is_numeric($arrayAsociativo['id_mueble']) || (Float) $arrayAsociativo['id_mueble']%1 != 0 )
         ) {
             throw new \InvalidArgumentException(
                 "Datos invalidos. No pueden haber campos vacios. Peso, ancho, alto y largo deben ser double. ID debe ser int."
