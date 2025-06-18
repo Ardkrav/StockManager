@@ -18,7 +18,7 @@ jobs:
       - name: Traer carpeta tests/ desde rama testing
         run: |
           git fetch origin testing
-          git checkout origin/testing -- tests
+          git checkout origin/testing -- ../tests
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
