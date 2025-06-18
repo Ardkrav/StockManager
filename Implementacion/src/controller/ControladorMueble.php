@@ -19,8 +19,13 @@ class ControladorMueble
     public function crearMueble($arrayAsociativo)
     {
         if (
-            !isset($arrayAsociativo['nombre'], $arrayAsociativo['peso'], $arrayAsociativo['ancho'],
-            $arrayAsociativo['alto'], $arrayAsociativo['largo']) ||
+            !isset(
+                $arrayAsociativo['nombre'],
+                $arrayAsociativo['peso'],
+                $arrayAsociativo['ancho'],
+                $arrayAsociativo['alto'],
+                $arrayAsociativo['largo']
+            ) ||
             empty($arrayAsociativo['nombre']) || !is_numeric($arrayAsociativo['peso']) ||
             !is_numeric($arrayAsociativo['ancho']) || !is_numeric($arrayAsociativo['alto']) ||
             !is_numeric($arrayAsociativo['largo'])
@@ -61,8 +66,7 @@ class ControladorMueble
     public function obtenerMuebleId($id_mueble)
     {
         $resultado = $this->mapper->obtenerMuebleId($id_mueble);
-        if($resultado === null)
-        {
+        if ($resultado === null) {
             throw new \RunTimeException("No se encontro un mueble con la ID especificada.");
         }
         $this->mueble->setNombre($resultado["nombre"]);
@@ -76,17 +80,25 @@ class ControladorMueble
     public function actualizarMuebleId($arrayAsociativo)
     {
         if (
-            !isset($arrayAsociativo['nombre'], $arrayAsociativo['peso'], $arrayAsociativo['ancho'],
-            $arrayAsociativo['alto'], $arrayAsociativo['largo'], $arrayAsociativo['id_mueble']) ||
-            empty($arrayAsociativo['nombre']) || 
+            !isset(
+                $arrayAsociativo['nombre'],
+                $arrayAsociativo['peso'],
+                $arrayAsociativo['ancho'],
+                $arrayAsociativo['alto'],
+                $arrayAsociativo['largo'],
+                $arrayAsociativo['id_mueble']
+            ) ||
+            empty($arrayAsociativo['nombre']) ||
             !is_numeric($arrayAsociativo['peso']) ||
-            !is_numeric($arrayAsociativo['ancho']) || 
+            !is_numeric($arrayAsociativo['ancho']) ||
             !is_numeric($arrayAsociativo['alto']) ||
-            !is_numeric($arrayAsociativo['largo']) || 
-            (!is_numeric($arrayAsociativo['id_mueble']) || (Float) $arrayAsociativo['id_mueble']%1 != 0 )
+            !is_numeric($arrayAsociativo['largo']) ||
+            (!is_numeric($arrayAsociativo['id_mueble']) || (float) $arrayAsociativo['id_mueble'] % 1 != 0 )
         ) {
             throw new \InvalidArgumentException(
-                "Datos invalidos. No pueden haber campos vacios. Peso, ancho, alto y largo deben ser double. ID debe ser int."
+                "Datos invalidos. No pueden haber campos vacios. 
+                Peso, ancho, alto y largo deben ser double. 
+                ID debe ser int."
             );
         }
         $this->mueble->setId($arrayAsociativo["id_mueble"]);
