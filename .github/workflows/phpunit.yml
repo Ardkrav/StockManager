@@ -22,13 +22,16 @@ jobs:
           php-version: '8.2'
 
       - name: Instalar dependencias
+        working-directory: Implementacion
         run: composer install
 
       - name: Corregir permisos de phpunit
+        working-directory: Implementacion
         run: chmod +x vendor/bin/phpunit
 
 
       - name: Ejecutar pruebas y generar reporte
+        working-directory: Implementacion
         run: |
           mkdir -p test_results
           composer test -- --testdox-html test_results/phpunit-report.html
@@ -38,4 +41,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: phpunit-report
-          path: test_results/phpunit-report.html
+          path: Implementacion/test_results/phpunit-report.html

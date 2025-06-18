@@ -17,10 +17,13 @@ jobs:
           php-version: '8.2'
 
       - name: Instalar dependencias
+        working-directory: Implementacion
         run: composer install
 
       - name: Corregir permisos de phpcs
+        working-directory: Implementacion
         run: chmod +x vendor/bin/phpcs
 
       - name: Ejecutar PHPCS
+        working-directory: Implementacion
         run: composer lint
