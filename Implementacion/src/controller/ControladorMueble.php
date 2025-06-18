@@ -19,9 +19,9 @@ class ControladorMueble
     public function crearMueble($arrayAsociativo)
     {
         if (
-            empty($arrayAsociativo['nombre']) || is_double($arrayAsociativo['peso']) ||
-            is_double($arrayAsociativo['ancho']) || is_double($arrayAsociativo['alto']) ||
-            is_double($arrayAsociativo['largo'])
+            empty($arrayAsociativo['nombre']) || !is_numeric($arrayAsociativo['peso']) ||
+            !is_numeric($arrayAsociativo['ancho']) || !is_numeric($arrayAsociativo['alto']) ||
+            !is_numeric($arrayAsociativo['largo'])
         ) {
             throw new \InvalidArgumentException(
                 "Datos invalidos. No pueden haber campos vacios. Peso, ancho, alto y largo deben ser double."
@@ -74,9 +74,9 @@ class ControladorMueble
     public function actualizarMuebleId($arrayAsociativo)
     {
         if (
-            empty($arrayAsociativo['nombre']) || is_double($arrayAsociativo['peso']) ||
-            is_double($arrayAsociativo['ancho']) || is_double($arrayAsociativo['alto']) ||
-            is_double($arrayAsociativo['largo']) || is_integer($arrayAsociativo['id_mueble'])
+            empty($arrayAsociativo['nombre']) || !is_numeric($arrayAsociativo['peso']) ||
+            !is_numeric($arrayAsociativo['ancho']) || !is_numeric($arrayAsociativo['alto']) ||
+            !is_numeric($arrayAsociativo['largo']) || (!is_numeric($arrayAsociativo['id_mueble']) || is_float((Float) $arrayAsociativo['id_mueble']) )
         ) {
             throw new \InvalidArgumentException(
                 "Datos invalidos. No pueden haber campos vacios. Peso, ancho, alto y largo deben ser double. ID debe ser int."
