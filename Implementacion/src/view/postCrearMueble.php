@@ -22,5 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     } catch (\InvalidArgumentException $e) {
         $error = $e->getMessage();
+        header('Location: ./crearMueble.php?error=argumentoInvalido');
+        exit;
     }
 }

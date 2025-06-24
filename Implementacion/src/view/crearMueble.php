@@ -1,7 +1,13 @@
 <?php
 
-$error = null;
+if (isset($_GET['error']))
+{
+    $error = 
+        "ERROR: Argumento invalido. \nRevise que no hayan campos vacios y 
+        peso, ancho, alto y largo sean valores numéricos.";
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -22,6 +28,10 @@ $error = null;
         </h1>
     </header>
     <section>
+        <?php if ($error) : ?>
+            <p style="color: red; font-weight: bold;" id="mensajeExito"><?php echo htmlspecialchars($error); ?></p>
+        <?php endif; ?>
+
         <form method="POST" action="postCrearMueble.php">
             <label for="nombre">Nombre:</label>
             <input id="nombre" name="nombre" type="text" required>
@@ -41,9 +51,6 @@ $error = null;
             <button type="submit">Aceptar</button>
             <button id="cancelar">Cancelar</button>
         </form>
-        <?php if ($error) : ?>
-        <p style="color: red; font-weight: bold;"> <?php echo $error ?></p>
-        <?php endif; ?>
     </section>
     <script src="./js/cancelarFormulario.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

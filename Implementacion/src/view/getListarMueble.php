@@ -7,7 +7,13 @@
 if (isset($_GET['eliminar'])) {
     $controladorMueble = new ControladorMueble();
     $id_mueble = $_GET['eliminar'];
-    $controladorMueble->eliminarMuebleId($id_mueble);
-    header("Location: listarMueble.php?exito=eliminado");
-    exit();
+    try{
+        $controladorMueble->eliminarMuebleId($id_mueble);
+        header("Location: listarMueble.php?exito=eliminado");
+        exit();
+    }
+    catch(\RunTimeException $e){
+        header("Location: listarMueble.php?error=idInvalido");
+        exit();
+    }
 }

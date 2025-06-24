@@ -59,7 +59,7 @@ class MuebleMapper
         $stmt->bind_param("i", $id_mueble);
         $stmt->execute();
         if ($stmt->affected_rows === 0) {
-            throw new RunTimeException("No se encontro el mueble a eliminar");
+            throw new \RunTimeException("No se encontro el mueble a eliminar");
         }
         return true;
     }

@@ -21,6 +21,13 @@ if (isset($_GET['exito'])) {
             break;
     }
 }
+if (isset($_GET['error'])){
+    switch ($_GET['error']){
+        case 'idInvalido':
+            $error = "ID de mueble inválido.";
+            break;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -46,6 +53,9 @@ if (isset($_GET['exito'])) {
 
         <?php if ($exito) : ?>
             <p style="color: green; font-weight: bold;" id="mensajeExito"><?php echo htmlspecialchars($exito); ?></p>
+        <?php endif; ?>
+        <?php if ($error) : ?>
+            <p style="color: red; font-weight: bold;" id="mensajeError"><?php echo htmlspecialchars($error); ?></p>
         <?php endif; ?>
 
         <button onclick="window.location.href='./crearMueble.php'">Agregar</button>
@@ -95,6 +105,13 @@ if (isset($_GET['exito'])) {
             <script>
                 setTimeout(() => {
                     document.getElementById("mensajeExito").style.display = "none";
+                }, 3000);
+            </script>
+        <?php endif; ?>
+        <?php if ($error) : ?>
+            <script>
+                setTimeout(() => {
+                    document.getElementById("mensajeError").style.display = "none";
                 }, 3000);
             </script>
         <?php endif; ?>
