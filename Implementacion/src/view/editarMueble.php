@@ -4,17 +4,17 @@ require_once __DIR__ . '/../bootstrap.php';
 use StockManager\Controller\ControladorMueble;
 
 $controladorMueble = new ControladorMueble();
-try{
+try {
     $mueble = $controladorMueble->obtenerMuebleId($_GET['id_mueble']);
-}
-catch (\RuntimeException $e){
+} catch (\RuntimeException $e) {
     header('Location: ./listarMueble.php?error=idInvalido');
     exit();
 }
 
-if (isset($_GET['error']))
-{
-    $error = 
+$error = null;
+
+if (isset($_GET['error'])) {
+    $error =
         "ERROR: Argumento invalido. \nRevise que no hayan campos vacios y 
         peso, ancho, alto y largo sean valores numéricos.";
 }
@@ -27,44 +27,70 @@ if (isset($_GET['error']))
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Manager</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 
 <body>
-    <header>
-        <nav>
-
-        </nav>
-        <h1>
-            Stock Manager
-        </h1>
-    </header>
-    <section>
-        <?php if ($error) : ?>
-            <p style="color: red; font-weight: bold;"><?php echo htmlspecialchars($error); ?></p>
+    <div class="container py-4">
+        <header class="mb-1 text-center">
+            <h2 class="fw-bold">
+                StockManager - Creacion de mueble
+            </h2>
+        </header>
+        <?php if ($error): ?>
+            <div id="mensajeError" class="alert alert-danger text-center"><?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>
-        <form method="POST" action="postEditarMueble.php?id_mueble=<?= $_GET['id_mueble'] ?>">
-            <label for="nombre">Nombre:</label>
-            <input id="nombre" name="nombre" type="text" value="<?php echo $mueble->getNombre() ?>" required>
-            <br>
-            <label for="peso">Peso (kg):</label>
-            <input id="peso" name="peso" type="number" step="0.01" value="<?php echo $mueble->getPeso() ?>" required>
-            <br>
-            <label for="ancho">Ancho (m):</label>
-            <input id="ancho" name="ancho" type="number" step="0.01" value="<?php echo $mueble->getAncho() ?>" required>
-            <br>
-            <label for="largo">Largo (m):</label>
-            <input id="largo" name="largo" type="number" step="0.01" value="<?php echo $mueble->getLargo() ?>" required>
-            <br>
-            <label for="alto">Alto (m):</label>
-            <input id="alto" name="alto" type="number" step="0.01" value="<?php echo $mueble->getAlto() ?>" required>
+        <form method="POST" action="postEditarMueble.php?id_mueble=<?= htmlspecialchars($_GET['id_mueble']) ?>"
+            class="needs-validation" novalidate>
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre:</label>
+                <input id="nombre" name="nombre" type="text" class="form-control"
+                    value="<?php echo htmlspecialchars($mueble->getNombre()) ?>" required
+                    placeholder="Ej: Mesa de comedor">
+                <div class="invalid-feedback">Por favor, ingrese un nombre.</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="peso" class="form-label">Peso (kg):</label>
+                <input id="peso" name="peso" type="number" step="0.01" class="form-control"
+                    value="<?php echo htmlspecialchars($mueble->getPeso()) ?>" required placeholder="Ej: 12.5">
+                <div class="invalid-feedback">Ingrese un peso válido.</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="ancho" class="form-label">Ancho (m):</label>
+                <input id="ancho" name="ancho" type="number" step="0.01" class="form-control"
+                    value="<?php echo htmlspecialchars($mueble->getAncho()) ?>" required placeholder="Ej: 1.20">
+                <div class="invalid-feedback">Ingrese un ancho válido.</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="largo" class="form-label">Largo (m):</label>
+                <input id="largo" name="largo" type="number" step="0.01" class="form-control"
+                    value="<?php echo htmlspecialchars($mueble->getLargo()) ?>" required placeholder="Ej: 2.00">
+                <div class="invalid-feedback">Ingrese un largo válido.</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="alto" class="form-label">Alto (m):</label>
+                <input id="alto" name="alto" type="number" step="0.01" class="form-control"
+                    value="<?php echo htmlspecialchars($mueble->getAlto()) ?>" required placeholder="Ej: 0.75">
+                <div class="invalid-feedback">Ingrese un alto válido.</div>
+            </div>
+
             <hr>
-            <button type="submit">Aceptar</button>
-            <button id="cancelar">Cancelar</button>
+
+            <button type="submit" class="btn btn-success me-2">Aceptar</button>
+            <button type="button" id="cancelar" class="btn btn-secondary">Cancelar</button>
         </form>
-    </section>
+
+    </div>
     <script src="./js/cancelarFormulario.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="./js/restriccionesBoostrap.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
