@@ -31,8 +31,10 @@ if (isset($_GET['error'])) {
                 </h2>
             </header>
 
-            <?php if ($error): ?>
-                <div id="mensajeError" class="alert alert-danger text-center"><?php echo htmlspecialchars($error); ?></div>
+            <?php if ($error) : ?>
+                <div id="mensajeError" class="alert alert-danger text-center">
+                    <?php echo htmlspecialchars($error); ?>
+                </div>
             <?php endif; ?>
 
             <form method="POST" action="postCrearMueble.php" class="needs-validation w-75" novalidate>

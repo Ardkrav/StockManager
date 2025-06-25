@@ -41,8 +41,10 @@ if (isset($_GET['error'])) {
                     StockManager - Actualizar <?php echo $mueble->getNombre() ?>
                 </h2>
             </header>
-            <?php if ($error): ?>
-                <div id="mensajeError" class="alert alert-danger text-center"><?php echo htmlspecialchars($error); ?></div>
+            <?php if ($error) : ?>
+                <div id="mensajeError" class="alert alert-danger text-center">
+                    <?php echo htmlspecialchars($error); ?>
+                </div>
             <?php endif; ?>
             <form method="POST" action="postEditarMueble.php?id_mueble=<?= htmlspecialchars($_GET['id_mueble']) ?>"
                 class="needs-validation w-75" novalidate>
