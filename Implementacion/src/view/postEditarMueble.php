@@ -19,9 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         $controladorMueble->actualizarMuebleId($arrayAsociativo);
-        header('Location: ./listarMueble.php?exito=editado');
+        header('Location: /stockmanager/index.php?exito=editado');
         exit();
     } catch (\InvalidArgumentException $e) {
         $error = $e->getMessage();
+        $id = $_GET['id_mueble'];
+        header("Location: ./editarMueble.php?id_mueble=$id&error=argumentoInvalido");
+        exit();
     }
 }
