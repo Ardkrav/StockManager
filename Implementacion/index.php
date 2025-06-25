@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../bootstrap.php';
+require_once __DIR__ . '/src/bootstrap.php';
 
 use StockManager\Controller\ControladorMueble;
 
@@ -39,6 +39,8 @@ if (isset($_GET['error'])) {
     <title>Stock Manager</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.dataTables.css" />
 </head>
 
@@ -83,11 +85,13 @@ if (isset($_GET['error'])) {
                             <td class="text-center"><?php echo $mueble->getVolumen(); ?></td>
                             <td class="text-center">
                                 <button class="btn btn-sm btn-warning me-2"
-                                        onclick="window.location.href='editarMueble.php?id_mueble=<?php echo $mueble->getId(); ?>'">
+                                        onclick="window.location.href='./src/view/editarMueble.php?id_mueble=<?php echo $mueble->getId(); ?>'">
+                                    <i class="bi bi-pencil-square"></i>
                                     Editar
                                 </button>
                                 <button class="btn btn-sm btn-danger"
                                         onclick="onConfirm(<?php echo $mueble->getId(); ?>)">
+                                    <i class="bi bi-trash"></i>
                                     Eliminar
                                 </button>
                             </td>
@@ -145,7 +149,8 @@ if (isset($_GET['error'])) {
             initComplete: function () {
             $('.custom-button').html(`
                 <div class="mb-3 text-end">
-                <button class="btn btn-primary" onclick="window.location.href='./crearMueble.php'">
+                <button class="btn btn-primary" onclick="window.location.href='./src/view/crearMueble.php'">
+                    <i class="bi bi-plus"></i>
                     Agregar Mueble
                 </button>
                 </div>
